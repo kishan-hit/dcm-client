@@ -11,3 +11,15 @@ export async function loginUser(userData) {
     const result = await axios.post(reqUrl,userData);
     return result.data;
 }
+
+export async function getQueries() {
+    const reqUrl = 'http://localhost:8080/auth/get-queries';
+    const result = await axios.get(reqUrl);
+    return result.data;
+}
+
+export async function postJob(job) {
+    const reqUrl = `http://localhost:8080/auth/post-job`;
+    const result = await axios.post(reqUrl,job);
+    return result.data;
+}
