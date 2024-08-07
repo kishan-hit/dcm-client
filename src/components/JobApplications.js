@@ -1,65 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import Loader from './Loader'
+import { getApplicants } from '../api/discover';
 
 export default function JobApplications({setCountApp}) {
     // const [applicants, setApplicant] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [applicants, setApplicants] = useState([]);
 
-    const applicants = [
-        {
-            name: "Alice Johnson",
-            email: "alice.johnson@example.com",
-            contactNo: "+1234567890"
-        },
-        {
-            name: "Bob Smith",
-            email: "bob.smith@example.com",
-            contactNo: "+1987654321"
-        },
-        {
-            name: "Charlie Brown",
-            email: "charlie.brown@example.com",
-            contactNo: "+1122334455"
-        },
-        {
-            name: "Diana Prince",
-            email: "diana.prince@example.com",
-            contactNo: "+2233445566"
-        },
-        {
-            name: "Evan Davis",
-            email: "evan.davis@example.com",
-            contactNo: "+3344556677"
-        },
-        {
-            name: "Fiona Adams",
-            email: "fiona.adams@example.com",
-            contactNo: "+4455667788"
-        },
-        {
-            name: "George Harris",
-            email: "george.harris@example.com",
-            contactNo: "+5566778899"
-        },
-        {
-            name: "Hannah Lee",
-            email: "hannah.lee@example.com",
-            contactNo: "+6677889900"
-        },
-        {
-            name: "Isaac Martinez",
-            email: "isaac.martinez@example.com",
-            contactNo: "+7788990011"
-        },
-        {
-            name: "Jessica Thompson",
-            email: "jessica.thompson@example.com",
-            contactNo: "+8899001122"
-        }
-    ];
+    async function fetchApplicants(){
+        setLoading(true)
+        const list = await getApplicants();
+        setLoading(false);
+        setApplicants(list);
+        setCountApp(list.length);
+    }
+
+    function showResume(resume){
+        window.open(`http://localhost:8080/resumes/${resume}`, "_blank", "noreferrer")
+    }
 
     useEffect(()=>{
-        setCountApp(applicants.length);
+        fetchApplicants();
     },[])
 
 
@@ -71,13 +32,13 @@ export default function JobApplications({setCountApp}) {
             
             {
                 applicants.map((applicant, index) => (
-                    <div className='p-4 bg-white shadow-lg rounded-lg flex flex-col justify-between' key={index}>
+                    <div className='px-4 py-6 bg-white shadow-lg rounded-lg flex flex-col justify-betwee h-fit' key={index}>
                         <div>
                             <div className='text-xl font-semibold'>Name : {applicant.name}</div>
                             <div className=''>Email : {applicant.email}</div>
-                            <div className=''>Contact No : {applicant.contactNo}</div>
+                            <div className=''>Contact No : {applicant.contact}</div>
                         </div>
-                        <button className='mt-4 w-fit bg-orange-600 text-white text-base hover:bg-orange-700 px-3 py-2'>View Resume</button>
+                        <button className='mt-4 w-fit bg-orange-600 text-white text-base hover:bg-orange-700 px-3 py-2' onClick={()=>showResume(applicant.resume)}>View Resume</button>
                     </div>
                 ))
             }

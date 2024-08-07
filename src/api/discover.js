@@ -18,6 +18,12 @@ export async function getQueries() {
     return result.data;
 }
 
+export async function getApplicants() {
+    const reqUrl = 'http://localhost:8080/auth/get-applicants';
+    const result = await axios.get(reqUrl);
+    return result.data;
+}
+
 export async function postJob(job) {
     const reqUrl = `http://localhost:8080/auth/post-job`;
     const result = await axios.post(reqUrl,job);
