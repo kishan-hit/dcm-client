@@ -1,24 +1,25 @@
-import React from "react"; 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
-import Home from "./pages/Home";
-import Queries from "./pages/Queries";
-import Careers from "./pages/Careers";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
+import Careers from './pages/Careers';
+import Queries from './pages/Queries';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/signup' element={<SignupPage />} ></Route>
-          <Route path='/login' element={<LoginPage />}></Route>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/queries' element={<Queries />}></Route>
-          <Route path='/careers' element={<Careers />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/queries" element={<Queries />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

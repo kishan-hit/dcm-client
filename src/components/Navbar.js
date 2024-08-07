@@ -12,6 +12,11 @@ export default function Navbar(props) {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
+    function handleLogout(){
+        localStorage.removeItem("token");
+        navigate('/login');
+    }
+
     return (
         <div className='fixed top-0 w-full z-50 bg-white'>
             <div className='px-3 md:px-16 lg:px-40 flex items-center justify-between py-1  bg-orange-500 text-white'>
@@ -50,6 +55,7 @@ export default function Navbar(props) {
                         <div onClick={() => navigate('/')} className={`hover:text-orange-600 cursor-pointer ${props.page === "home" && 'text-orange-600'}`}>Home</div>
                         <div onClick={() => navigate('/queries')} className={`hover:text-orange-600 cursor-pointer ${props.page === "queries" && 'text-orange-600'}`}>Queries</div>
                         <div onClick={() => navigate('/careers')} className={`hover:text-orange-600 cursor-pointer ${props.page === "careers" && 'text-orange-600'}`}>Careers</div>
+                        <div onClick={handleLogout} className={`bg-orange-500 hover:bg-orange-600 text-white cursor-pointer p-2`}>Logout</div>
                     </div>
                     <div className="px-3 lg:hidden">
                         <button
@@ -74,6 +80,7 @@ export default function Navbar(props) {
                     <div onClick={() => navigate('/')} className="block px-4 py-2 hover:text-orange-600">Home</div>
                     <div onClick={() => navigate('/queries')} className="block px-4 py-2 hover:text-orange-600">Queries</div>
                     <div onClick={() => navigate('/careers')} className="block px-4 py-2 hover:text-orange-600">Careers</div>
+                    <div onClick={handleLogout} className={`bg-orange-500 hover:bg-orange-600 text-white cursor-pointer p-2 inline-block`}>Logout</div>
                 </div>
             </nav>
         </div>
