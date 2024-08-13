@@ -18,8 +18,14 @@ export async function getQueries() {
     return result.data;
 }
 
-export async function getApplicants() {
-    const reqUrl = 'http://localhost:8080/auth/get-applicants';
+export async function getRoles() {
+    const reqUrl = `http://localhost:8080/auth/get-jobs`;
+    const result = await axios.get(reqUrl);
+    return result.data;
+}
+
+export async function getApplicants(role) {
+    const reqUrl = `http://localhost:8080/auth/get-applicants?role=${role}`;
     const result = await axios.get(reqUrl);
     return result.data;
 }
