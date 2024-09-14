@@ -42,8 +42,9 @@ export default function JobApplications(props) {
                                     <div className='text-xl font-semibold'>Name : {applicant.name}</div>
                                     <div className=''>Email : {applicant.email}</div>
                                     <div className=''>Contact No : {applicant.contact}</div>
+                                    <div className=''>Qualification : {applicant.qualification}</div>
                                 </div>
-                                <button className='mt-4 w-fit bg-orange-600 text-white text-base hover:bg-orange-700 px-3 py-2' onClick={() => showResume(applicant.resume)}>View Resume</button>
+                                {applicant.resume && <button className='mt-4 w-fit bg-orange-600 text-white text-base hover:bg-orange-700 px-3 py-2' onClick={() => showResume(applicant.resume)}>View Resume</button>}
                             </div>
                         ))
                     }
